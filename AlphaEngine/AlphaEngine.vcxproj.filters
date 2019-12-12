@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{6c5eeb34-9527-42ed-80d3-1fbb911a95ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{09f8e63b-aec0-41f7-a274-8224a5a6f4b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Shader">
+      <UniqueIdentifier>{e35b6a80-d725-40a5-800d-ee670428091b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene">
+      <UniqueIdentifier>{e025556c-ddf0-4231-8174-aaebd4143ec9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object">
+      <UniqueIdentifier>{76a73048-fe04-4a13-bcbf-69abc0d9a073}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\imgui">
+      <UniqueIdentifier>{6dcb2f4c-7866-4764-af6e-740e742ef1a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\ScriptLang">
+      <UniqueIdentifier>{8e4517fb-60ae-4dd9-886f-efc0a3fdf6ae}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameApp.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadShaders.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="tiny_obj_loader.cc">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="loadobj.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadTex.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjModel.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_glfw.cpp">
+      <Filter>Engine\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_opengl3.cpp">
+      <Filter>Engine\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_win32.cpp">
+      <Filter>Engine\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_widgets.cpp">
+      <Filter>Engine\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui.cpp">
+      <Filter>Engine\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_demo.cpp">
+      <Filter>Engine\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_draw.cpp">
+      <Filter>Engine\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockManager.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SymbolTable.cpp">
+      <Filter>Game\ScriptLang</Filter>
+    </ClCompile>
+    <ClCompile Include="Script.cpp">
+      <Filter>Game\ScriptLang</Filter>
+    </ClCompile>
+    <ClCompile Include="Token.cpp">
+      <Filter>Game\ScriptLang</Filter>
+    </ClCompile>
+    <ClCompile Include="StatementImpl.cpp">
+      <Filter>Game\ScriptLang</Filter>
+    </ClCompile>
+    <ClCompile Include="Statement.cpp">
+      <Filter>Game\ScriptLang</Filter>
+    </ClCompile>
+    <ClCompile Include="ExpressionImpl.cpp">
+      <Filter>Game\ScriptLang</Filter>
+    </ClCompile>
+    <ClCompile Include="Expression.cpp">
+      <Filter>Game\ScriptLang</Filter>
+    </ClCompile>
+    <ClCompile Include="Interpolator.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameApp.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadShaders.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="tiny_obj_loader.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="loadobj.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadTex.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjModel.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLUtil.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_glfw.h">
+      <Filter>Engine\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_opengl3.h">
+      <Filter>Engine\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_win32.h">
+      <Filter>Engine\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_internal.h">
+      <Filter>Engine\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_rectpack.h">
+      <Filter>Engine\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_textedit.h">
+      <Filter>Engine\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_truetype.h">
+      <Filter>Engine\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imconfig.h">
+      <Filter>Engine\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui.h">
+      <Filter>Engine\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockManager.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockData.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SymbolTable.h">
+      <Filter>Game\ScriptLang</Filter>
+    </ClInclude>
+    <ClInclude Include="Script.h">
+      <Filter>Game\ScriptLang</Filter>
+    </ClInclude>
+    <ClInclude Include="Token.h">
+      <Filter>Game\ScriptLang</Filter>
+    </ClInclude>
+    <ClInclude Include="Statement.h">
+      <Filter>Game\ScriptLang</Filter>
+    </ClInclude>
+    <ClInclude Include="StatementImpl.h">
+      <Filter>Game\ScriptLang</Filter>
+    </ClInclude>
+    <ClInclude Include="Expression.h">
+      <Filter>Game\ScriptLang</Filter>
+    </ClInclude>
+    <ClInclude Include="ExpressionImpl.h">
+      <Filter>Game\ScriptLang</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAction.h">
+      <Filter>Game\ScriptLang</Filter>
+    </ClInclude>
+    <ClInclude Include="Interpolator.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Assets\Shader\phong.frag">
+      <Filter>Game\Shader</Filter>
+    </None>
+    <None Include="..\Assets\Shader\phong.vert">
+      <Filter>Game\Shader</Filter>
+    </None>
+    <None Include="..\Assets\Shader\Sprite.vert">
+      <Filter>Game\Shader</Filter>
+    </None>
+    <None Include="..\Assets\Shader\Sprite.frag">
+      <Filter>Game\Shader</Filter>
+    </None>
+  </ItemGroup>
+</Project>
