@@ -19,13 +19,13 @@ static void HelpMarker()
 		ImGui::BeginTooltip();
 		ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
 		ImGui::TextUnformatted(
-			u8"Go(number) - ¼ıÀÚ¸¸Å­ ÇöÀç ¹æÇâÀ¸·Î ÀüÁø\n"
-			"TurnLeft(number) - ¼ıÀÚ¸¸Å­ ¿ŞÂÊÀ¸·Î È¸Àü\n"
-			"TurnRight(number) - ¼ıÀÚ¸¸Å­ ¿À¸¥ÂÊÀ¸·Î È¸Àü\n"
-			"var i = 0 - º¯¼ö i »ı¼ºÈÄ 0À¸·Î ÃÊ±âÈ­\n"
-			"loop number { ... } - ¼ıÀÚ¸¸Å­ ¹İº¹\n"
-			"for i=0; i<5; i=i+1 { ... } - i¸¦ 5°¡ µÉ¶§±îÁö ¹İº¹\n"
-			"if (i<5) { ... } - i°¡ 5º¸´Ù ÀÛÀ¸¸é ½ÇÇà\n"
+			u8"Go(number) - ìˆ«ìë§Œí¼ í˜„ì¬ ë°©í–¥ìœ¼ë¡œ ì „ì§„\n"
+			"TurnLeft(number) - ìˆ«ìë§Œí¼ ì™¼ìª½ìœ¼ë¡œ íšŒì „\n"
+			"TurnRight(number) - ìˆ«ìë§Œí¼ ì˜¤ë¥¸ìª½ìœ¼ë¡œ íšŒì „\n"
+			"var i = 0 - ë³€ìˆ˜ i ìƒì„±í›„ 0ìœ¼ë¡œ ì´ˆê¸°í™”\n"
+			"loop number { ... } - ìˆ«ìë§Œí¼ ë°˜ë³µ\n"
+			"for i=0; i<5; i=i+1 { ... } - ië¥¼ 5ê°€ ë ë•Œê¹Œì§€ ë°˜ë³µ\n"
+			"if (i<5) { ... } - iê°€ 5ë³´ë‹¤ ì‘ìœ¼ë©´ ì‹¤í–‰\n"
 		);
 		ImGui::PopTextWrapPos();
 		ImGui::EndTooltip();
@@ -47,60 +47,81 @@ static bool picking(glm::vec2 pos, glm::vec2 size)
 int TestScene::_stageNumber = 0;
 bool TestScene::_isStart = false;
 static std::vector<std::vector<StageBlockType> > _mapdata[] = {
-	{
+	{	/* stage 0 */
 		{Start, Default, Default, Object},
 	},
-	{
+	{	/* stage 1 */
 		{Start, Default, Default},
-		{Null, Null, Default},
-		{Null, Null, Object},
+		{ Null,    Null, Default},
+		{ Null,    Null,  Object}
 	},
-	{
+	{	/* stage 2 */
 		{Start, Default, PiranhaPlant},
-		{Null, Default, Default},
-		{Null, Null, Object},
+		{ Null, Default,      Default},
+		{ Null,    Null,       Object}
 	},
-	{
-		{Start, Pond, Default},
+	{	/* stage 3 */
+		{  Start,     Pond, Default},
 		{Default, PondFrog, Default},
-		{Default, Default, Object},
-	},
-	{	// stage 1
-		{Pond, Pond, Pond, Pond, Pond, Pond, Pond},
-		{Pond, Start, Default, Default, Default, Object, Pond},
-		{Pond, Default, Pond, Pond, Pond, Default, Pond},
-		{Pond, Default, Pond, PondFrog, Pond, PiranhaPlant, Pond},
-		{Pond, Default, Pond, Pond, Pond, Default, Pond},
-		{Pond, Object, Default,Default,Default, Object, Pond},
-		{Pond, Pond, Pond, Pond, Pond, Pond, Pond},
-	},
-	{	// stage 2
-		{Object, Default, Object, Pond, Pond},
-		{Default, Pond, Default, Pond, Pond},
-		{Object, Default, Start, Default, Object},
-		{Pond, Pond, Default, PondFrog, Default},
-		{Pond, Pond, Object, Default, Object}
-	},
-	{	// stage 3
-		{Object, Default, Object, Default, Object},
-		{Default, Pond, Default, Pond, Default},
-		{Object, Default, Start, Default, Object},
-		{Default, Pond, Default, Pond, Default},
-		{Object, Default, Object, Default, Object}
+		{Default,  Default,  Object}
 	},
 	{	/* stage 4 */
-		{Start, Object, Pond, PondFrog, Pond, Pond},
-		{Pond, Default, Pond, Pond, Pond, Pond},
-		{Pond, Object, Default, Default, Object, PondFrog},
-		{Pond, Pond, Pond, Pond, Default, Pond},
-		{Pond, PondFrog, Pond, Pond, Default, Pond},
-		{Pond, Pond, Pond, Pond, Default, Pond},
-		{Pond, Pond, PondFrog, Pond, Object, Pond},
+		{Pond,    Pond,    Pond,     Pond,    Pond,         Pond, Pond},
+		{Pond,   Start, Default,  Default, Default,       Object, Pond},
+		{Pond, Default,    Pond,     Pond,    Pond,      Default, Pond},
+		{Pond, Default,    Pond, PondFrog,    Pond, PiranhaPlant, Pond},
+		{Pond, Default,    Pond,     Pond,    Pond,      Default, Pond},
+		{Pond,  Object, Default,  Default, Default,       Object, Pond},
+		{Pond,    Pond,    Pond,     Pond,    Pond,         Pond, Pond}
 	},
-	{
+	{	/* stage 5 */
+		{ Object, Default,  Object,     Pond,    Pond},
+		{Default,    Pond, Default,     Pond,    Pond},
+		{ Object, Default,   Start,  Default,  Object},
+		{   Pond,    Pond, Default, PondFrog, Default},
+		{   Pond,    Pond,  Object,  Default,  Object}
+	},
+	{	/* stage 6 */
+		{ Object, Default,  Object, Default,  Object},
+		{Default,    Pond, Default,    Pond, Default},
+		{ Object, Default,   Start, Default,  Object},
+		{Default,    Pond, Default,    Pond, Default},
+		{ Object, Default,  Object, Default,  Object}
+	},
+	{	/* stage 7 */
+		{Start,   Object,     Pond, PondFrog,    Pond,     Pond},
+		{ Pond,  Default,     Pond,     Pond,    Pond,     Pond},
+		{ Pond,   Object,  Default,  Default,  Object, PondFrog},
+		{ Pond,     Pond,     Pond,     Pond, Default,     Pond},
+		{ Pond, PondFrog,     Pond,     Pond, Default,     Pond},
+		{ Pond,     Pond,     Pond,     Pond, Default,     Pond},
+		{ Pond,     Pond, PondFrog,     Pond,  Object,     Pond}
+	},
+	{	/* stage 8 */
+		{       Strat,   Object,  Default,  Default,  Default,  Default,  Default,  Default},
+		{     Default,     Pond, PondFrog,     Pond,     Pond, PondFrog,     Pond,   Object},
+		{     Default, PondFrog,  Deafult,   Object,  Default,  Default, PondFrog,  Default},
+		{     Default,     Pond,  Default,     Pond,     Pond,   Object,     Pond,  Default},
+		{     Default,     Pond,  Default,     Pond,   Object,  Default, PondFrog,  Default},
+		{     Default,     Pond,   Object,     Pond,     Pond, PondFrog,     Pond,  Default},
+		{      Object, PondFrog,  Deafult,  Default,  Default,  Default,   Object,  Default},
+		{PiranhaPlant,     Pond, PondFrog,     Pond,     Pond,     Pond,     Pond, PondFrog}
+	},
+	{	/* stage 9 */
+		{Pond,    Start,  Default,  Object, Pond},
+		{Pond,     Pond, PondFrog, Default, Pond},
+		{Pond,   Object,  Deafult, Default, Pond},
+		{Pond,  Default, PondFrog,    Pond, Pond},
+		{Pond,  Default,  Default,  Object, Pond},
+		{Pond,     Pond, PondFrog, Default, Pond},
+		{Pond,   Object,  Deafult, Default, Pond},
+		{Pond,  Default, PondFrog,    Pond, Pond},
+		{Pond,  Default,  Default,  Object, Pond}
+	},
+	{	/* stage END */
 		{Object, Pond, Object},
 		{Pond, Start, Pond},
-		{Object, Pond, Object},
+		{Object, Pond, Object}
 	}
 };
 
@@ -186,7 +207,7 @@ void TestScene::Update()
 	GameScene::Update();
 	static auto app = GameApp::GetInstance();
 	static bool _isClicked = false;
-	// ¸¶¿ì½º Å¬¸¯¶§ ¹öÆ° ¾ÈÂÊ¿¡ ÀÖÀ¸¸é.
+	// ë§ˆìš°ìŠ¤ í´ë¦­ë•Œ ë²„íŠ¼ ì•ˆìª½ì— ìˆìœ¼ë©´.
 	if (!_isClicked && app->_isClick)
 	{
 		if (picking(_buttonPos, _buttonSize)) // picking
@@ -271,16 +292,16 @@ void TestScene::Render()
 	ImGui::NewFrame();
 	//ImGui::ShowDemoWindow();
 
-	if (!_drawLogo && ImGui::Begin(u8"²Ü¹ú ´ë¼Òµ¿", nullptr, ImGuiWindowFlags_NoCollapse))
+	if (!_drawLogo && ImGui::Begin(u8"ê¿€ë²Œ ëŒ€ì†Œë™", nullptr, ImGuiWindowFlags_NoCollapse))
 	{
-		ImGui::Text(u8"ÇÁ·Î±×·¡¹Ö °ø°£");
+		ImGui::Text(u8"í”„ë¡œê·¸ë˜ë° ê³µê°„");
 		ImGui::SameLine();
 		HelpMarker();
 
 		ImGui::SetNextItemWidth(-1);
 		ImGui::InputTextMultiline("", _rawScript, 512, ImVec2(-1, 300), ImGuiInputTextFlags_AllowTabInput);
 		
-		if (ImGui::Button(u8"½ÃÀÛ!"))
+		if (ImGui::Button(u8"ì‹œì‘!"))
 		{
 			// Play something.
 			delete _script;
@@ -338,7 +359,7 @@ void TestScene::Render()
 		}
 		
 		ImGui::SameLine();
-		if (ImGui::Button(u8"ÃÊ±âÈ­"))
+		if (ImGui::Button(u8"ì´ˆê¸°í™”"))
 		{
 			PlayRelease();
 			PlayInit();
@@ -436,7 +457,7 @@ void TestScene::PlayUpdate()
 
 	if (_nextAction)
 	{
-		// ¸ŞÆ®¸¯½º ¹İ¿µ.
+		// ë©”íŠ¸ë¦­ìŠ¤ ë°˜ì˜.
 		_nextAction = false;
 		if (_objectCount == 0)
 		{
@@ -444,7 +465,7 @@ void TestScene::PlayUpdate()
 			_drawLogo = true;
 			_sign = _clear;
 			_logoScale = 0.5f;
-			_errorMsg = u8"Å¬¸®¾î!";
+			_errorMsg = u8"í´ë¦¬ì–´!";
 			SoundManager::GetInstance()->StopChannel(Background);
 			SoundManager::GetInstance()->PlaySound(FX_Clear);
 			_interpolator->AddTween({ CircInOut, &_logoY, 3.0f, 0.0f, 4.2f, [this](Tween t)
@@ -482,7 +503,7 @@ void TestScene::PlayUpdate()
 					break;
 				default: 
 					_isPlay = false;
-					_errorMsg = u8"´õ ÀÌ»ó ¾ÕÀ¸·Î °¥ ¼ö ¾ø½À´Ï´Ù!";
+					_errorMsg = u8"ë” ì´ìƒ ì•ìœ¼ë¡œ ê°ˆ ìˆ˜ ì—†ìŠµë‹ˆë‹¤!";
 					_blockManager->SetStageData(_stageData);
 					PlayRelease();
 					return;
