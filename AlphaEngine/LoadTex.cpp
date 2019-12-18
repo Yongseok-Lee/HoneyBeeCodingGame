@@ -53,9 +53,9 @@ bool load_tex(const char* basedir, std::vector<tinyobj::real_t>& texcoords_out,
 			}
 			else
 			{
-				tc[0][0] = tc[0][1] = tc[0][2] = 0; 
-				tc[1][0] = tc[1][1] = tc[1][2] = 0; 
-				tc[2][0] = tc[2][1] = tc[2][2] = 0;
+				tc[0][0] = tc[0][1] = 0; 
+				tc[1][0] = tc[1][1] = 0; 
+				tc[2][0] = tc[2][1] = 0;
 			}
 			memcpy(texcoords_dst_ptr, tc, sizeof(real_t) * 6); texcoords_dst_ptr += 6;
 		}

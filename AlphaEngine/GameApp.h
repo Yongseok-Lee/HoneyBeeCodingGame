@@ -12,12 +12,15 @@ class GameApp : public Singleton<GameApp>
 	SoundManager* _soundManager;
 	GLFWwindow* _window;
 
-	int _width;
-	int _height;
-
 	bool _isExit;
 
 public:
+	int _width;
+	int _height;
+	bool _isClick = false;
+	double _mouseX;
+	double _mouseY;
+
 	GameApp();
 	~GameApp();
 

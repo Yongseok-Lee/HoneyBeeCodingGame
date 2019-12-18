@@ -21,7 +21,6 @@ ObjModel::~ObjModel()
 
 void ObjModel::Init()
 {
-	_shader = ShaderManager::GetInstance()->GetShader(ShaderManager::Phong);		// phong shader load.
 	glGenVertexArrays(1, &_vao);
 	{
 		glBindVertexArray(_vao);
@@ -33,12 +32,29 @@ void ObjModel::Init()
 
 		_colors.resize(_vertices.size());
 		for (size_t i = 0; i < _colors.size(); ++i)
-			_colors[i] = 1;
+			_colors[i] = 1.0f;
 
+		static ShaderManager* sm = ShaderManager::GetInstance();
+		
+		_shader = sm->GetShader(ShaderManager::Phong);
+		glUseProgram(_shader);
+		glBindVertexArray(_vao);
 		bind_buffer(_buffer[0], _vertices, _shader, "vPosition", 3);
 		bind_buffer(_buffer[1], _colors, _shader, "vColor", 3);
 		bind_buffer(_buffer[2], _texcoords, _shader, "vTexcoord", 2);
 		bind_buffer(_buffer[3], _normals, _shader, "vNormal", 3);
+
+		for (int i = 1; i < ShaderManager::Sprite; ++i)
+		{
+			_shader = sm->GetShader(static_cast<ShaderManager::Shader>(i));		// phong shader load.
+			glUseProgram(_shader);
+			glBindVertexArray(_vao);
+
+			bind_buffer(_buffer[0], _shader, "vPosition", 3);
+			bind_buffer(_buffer[1], _shader, "vColor", 3);
+			bind_buffer(_buffer[2], _shader, "vTexcoord", 2);
+			bind_buffer(_buffer[3], _shader, "vNormal", 3);
+		}
 	}
 
 	_camera = Camera::GetInstance();
@@ -51,9 +67,16 @@ void ObjModel::Update(glm::mat4 modelMatrix)
 
 void ObjModel::Render()
 {
+	static ShaderManager* sm = ShaderManager::GetInstance();
+	_shader = sm->GetShader();
 	glUseProgram(_shader);
 	glBindVertexArray(_vao);
 
+	bind_buffer(_buffer[0], _shader, "vPosition", 3);
+	bind_buffer(_buffer[1], _shader, "vColor", 3);
+	bind_buffer(_buffer[2], _shader, "vTexcoord", 2);
+	bind_buffer(_buffer[3], _shader, "vNormal", 3);
+	
 	auto V = _camera->GetViewing();
 	auto VM = V * _modelMatrix;
 	auto P = _camera->GetOrthographic();
@@ -86,7 +109,7 @@ void ObjModel::Render()
 			/*glUniform3fv(glGetUniformLocation(_shader, "Ka"), 1, _materials[m_id].ambient);
 			glUniform3fv(glGetUniformLocation(_shader, "Kd"), 1, _materials[m_id].diffuse);
 			glUniform3fv(glGetUniformLocation(_shader, "Ks"), 1, _materials[m_id].specular);*/
-			
+
 			glUniform3f(glGetUniformLocation(_shader, "Ka"), 0.2f, 0.2f, 0.2f);
 			glUniform3f(glGetUniformLocation(_shader, "Kd"), 1.0f, 1.0f, 1.0f);
 			glUniform3f(glGetUniformLocation(_shader, "Ks"), 0.0f, 0.0f, 0.0f);

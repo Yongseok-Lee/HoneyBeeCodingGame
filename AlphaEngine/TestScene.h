@@ -3,14 +3,22 @@
 #include "BlockManager.h"
 #include "Script.h"
 #include "Interpolator.h"
+#include "Sprite.h"
 
 class TestScene : public GameScene
 {
 	char* _rawScript;
 
+	static bool _isStart;
+
 	std::string _errorMsg;
 	BlockManager* _blockManager;
 	StageData _stageData;
+
+	glm::vec2 _buttonPos;
+	glm::vec2 _buttonSize;
+	Sprite* _startButton;
+	float _buttonY;
 
 	ObjModel* _sign;
 	ObjModel* _logo;

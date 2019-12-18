@@ -200,6 +200,10 @@
     <ClInclude Include="Token.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Assets\Shader\flat.frag" />
+    <None Include="..\Assets\Shader\flat.vert" />
+    <None Include="..\Assets\Shader\gouraud.frag" />
+    <None Include="..\Assets\Shader\gouraud.vert" />
     <None Include="..\Assets\Shader\phong.frag" />
     <None Include="..\Assets\Shader\phong.vert" />
     <None Include="..\Assets\Shader\Sprite.frag" />

@@ -114,7 +114,9 @@
     <ClCompile Include="Expression.cpp">
       <Filter>Game\ScriptLang</Filter>
     </ClCompile>
-    <ClCompile Include="Interpolator.cpp" />
+    <ClCompile Include="Interpolator.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -231,7 +233,9 @@
     <ClInclude Include="PlayerAction.h">
       <Filter>Game\ScriptLang</Filter>
     </ClInclude>
-    <ClInclude Include="Interpolator.h" />
+    <ClInclude Include="Interpolator.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Assets\Shader\phong.frag">
@@ -244,6 +248,18 @@
       <Filter>Game\Shader</Filter>
     </None>
     <None Include="..\Assets\Shader\Sprite.frag">
+      <Filter>Game\Shader</Filter>
+    </None>
+    <None Include="..\Assets\Shader\gouraud.frag">
+      <Filter>Game\Shader</Filter>
+    </None>
+    <None Include="..\Assets\Shader\gouraud.vert">
+      <Filter>Game\Shader</Filter>
+    </None>
+    <None Include="..\Assets\Shader\flat.frag">
+      <Filter>Game\Shader</Filter>
+    </None>
+    <None Include="..\Assets\Shader\flat.vert">
       <Filter>Game\Shader</Filter>
     </None>
   </ItemGroup>

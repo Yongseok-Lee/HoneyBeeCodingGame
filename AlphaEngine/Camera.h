@@ -11,9 +11,15 @@ public:
 	glm::vec3 center;
 	glm::vec3 up;
 
+	int _windowX;
+	int _windowY;
+
 	Camera();
 	virtual ~Camera() = default;
 
+	void Init();
+
+	glm::mat4 GetSpriteProj() const;
 	glm::mat4 GetViewing() const;
 	glm::mat4 GetOrthographic() const;
 	glm::mat4 GetPerspective() const;

@@ -23,7 +23,12 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include "Camera.h"
+#include "ShaderManager.h"
 
+extern "C"
+{
+	__declspec(dllexport) unsigned long NvOptimusEnablement = 0x00000001;
+}
 
 void ErrorCallback(int errorCode, const char* errorDescription)
 {
@@ -44,6 +49,8 @@ void CharacterCallback(GLFWwindow* window, unsigned int keyCode)
 static bool isClick = false;
 static bool isRight = false;
 static bool isWheel = false;
+
+static bool joysticAvailable = false;
 
 void MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
@@ -188,8 +195,9 @@ void GameApp::Init()
 	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;   // Enable Gamepad Controls
 
 	// Setup Dear ImGui style
-	ImGui::StyleColorsDark();
+	//ImGui::StyleColorsDark();
 	//ImGui::StyleColorsClassic();
+	ImGui::StyleColorsLight();
 
 	// Setup Platform/Renderer bindings
 	ImGui_ImplGlfw_InitForOpenGL(_window, true);
@@ -200,6 +208,7 @@ void GameApp::Init()
 	io.Fonts->AddFontDefault();
 	/// 
 
+	Camera::GetInstance()->Init();
 	_interpolator->Init();
 	_soundManager->Init();
 	_sceneManager->Init();
@@ -209,6 +218,26 @@ void GameApp::ProcessKey(int key, int scancode, int action, int mods)
 {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(_window, GLFW_TRUE);
+
+	if (action == GLFW_PRESS)
+	{
+		switch (key)
+		{
+		case GLFW_KEY_F1:
+			ShaderManager::GetInstance()->SetShader(ShaderManager::Phong);
+			std::cout << "Phong Shader Mode" << std::endl;
+			break;
+		case GLFW_KEY_F2:
+			ShaderManager::GetInstance()->SetShader(ShaderManager::Gouraud);
+			std::cout << "Gouraud Shader Mode" << std::endl;
+			break;
+		case GLFW_KEY_F3:
+			ShaderManager::GetInstance()->SetShader(ShaderManager::Flat);
+			std::cout << "Flat Shader Mode" << std::endl;
+			break;
+		}
+		
+	}
 }
 
 void GameApp::Update()
@@ -216,9 +245,54 @@ void GameApp::Update()
 	glfwPollEvents();
 	_isExit = glfwWindowShouldClose(_window);
 
+	_isClick = isClick;
+	
+	glfwGetCursorPos(_window, &_mouseX, &_mouseY);
+	//_mouseX
+
+	if (glfwJoystickPresent(GLFW_JOYSTICK_1))
+	{
+		static auto camera = Camera::GetInstance();
+
+		int count;
+		const float* axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &count);
+			//std::cout << axes[i] << std::endl;
+			// 0,1 => 왼쪽 아날로그 조이스틱
+			// 2,3 => 오른쪽 아날로그 조이스틱
+
+		float x = abs(axes[2]) > 0.1 ? axes[2] : 0.0f;		// x는 오른쪽이 +임.
+		float y = abs(axes[3]) > 0.1 ? axes[3] : 0.0f;		// y는 위로 올리면 -임.
+		
+		/*
+		int w, h;
+		glfwGetWindowSize(_window, &w, &h);
+		GLfloat dx = 1.f*(xpos - mouse_pos[0]) / w;
+		GLfloat dy = -1.f*(ypos - mouse_pos[1]) / h;
+		GLfloat alpha = 2.0f;*/
+		glm::vec4 disp(camera->eye - camera->center, 1);
+		glm::mat4 V = camera->GetViewing();
+		glm::mat4 Rx = glm::rotate(glm::mat4(1.0f), 0.05f*y, glm::vec3(transpose(V)[0]));
+		glm::mat4 Ry = glm::rotate(glm::mat4(1.0f), 0.05f*x, glm::vec3(0, 1, 0));
+		glm::mat4 R = Ry * Rx;
+		camera->eye = camera->center + glm::vec3(R*disp);
+		camera->up = glm::mat3(R)*camera->up;
+	}
+	
 	_interpolator->Update();
 	_sceneManager->Update();
 	_soundManager->Update();
+
+#ifdef _DEBUG
+	static int fps = 0;
+	fps++;
+	static clock_t time = 0;
+	if (clock() - time > 1000)
+	{
+		std::cout << "fps: " << fps << std::endl;
+		fps = 0;
+		time = clock();
+	}
+#endif
 }
 
 void GameApp::Render()
@@ -226,6 +300,8 @@ void GameApp::Render()
 	glClearColor(51/255.0f, 204 / 255.0f, 255 / 255.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	glUseProgram(ShaderManager::GetInstance()->GetShader());
+	
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glEnable(GL_POLYGON_OFFSET_FILL);
 	glPolygonOffset(1, 1);

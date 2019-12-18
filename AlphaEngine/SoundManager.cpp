@@ -26,7 +26,8 @@ void SoundManager::Init()
 {
 	assert(_system->init(2, FMOD_INIT_NORMAL, nullptr) == FMOD_OK);
 	_sounds.resize(SoundAssetNum);
-	for (int i = 0; i < SoundAssetNum; ++i)
+	_system->createSound(SoundAssetPath[0], FMOD_LOOP_NORMAL, nullptr, &_sounds[0]);
+	for (int i = 1; i < SoundAssetNum; ++i)
 	{
 		_system->createSound(SoundAssetPath[i], FMOD_DEFAULT, nullptr, &_sounds[i]);
 	}
